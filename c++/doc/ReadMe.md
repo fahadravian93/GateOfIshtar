@@ -1,7 +1,7 @@
 ### C++ Based Solution of GateOfIshtar
 * Author : Fahad Umer 
 * Version : v1.0
-This document contains necessary details on problems which have been fixed and compiler falgs, version and build enviroment information.
+This document contains necessary details on problems which have been fixed and compiler flags, version and build environment information.
 
 
 ### Fixed Issues
@@ -11,7 +11,7 @@ In the current C++ based solution, a ring buffer is used for data logging which 
 
 
 ##### 2. Synchronization in case of multi threaded application
-Previous implementation has race conditions which can arise in multithreaded environment where a shared data buffer is used by both the producer and consumer of date time intervals. As each of the threads (producer and consumer) try to write to the global shared space, it is necessary to take care that they write to the memory in sync, or else the date time intrevals will get corrupted. 
+Previous implementation has race conditions which can arise in multi threaded environment where a shared data buffer is used by both the producer and consumer of date time intervals. As each of the threads (producer and consumer) try to write to the global shared space, it is necessary to take care that they write to the memory in sync, or else the date time intervals will get corrupted. 
 The current C++ based solution has locking mechanism implemented in circular buffer class to avoid such situations.
 
 
@@ -32,7 +32,7 @@ Total damage taken by a champion was subtracted from initial HP which can lead t
 
 
 ##### 6. Time duration overlapping
-Previously, time duration for “brand” and "Ahri" were overlapping which will result in huge incorrect damage. Overlapping durations have been fixed.
+Previously, time duration for “brand” and "Ahri" were overlapping which will result in huge incorrect damage. Overlapping duration have been fixed.
 
 
 ##### 7. Error handling
