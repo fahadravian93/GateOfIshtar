@@ -57,12 +57,12 @@ public:
 	explicit Champion(champion_t champion, int bufferCapacity);
 	virtual ~Champion();
 	int calculateChampionHealth( champion_t champion , CircularBuffer<dateTimeType> * date_intervals );
-
-	championMapType championMap;
+	championMapType getChampionMap() const ;
 
 	/* encapsulated data and functions */
 private:
 	int HP;
+	championMapType championMap;
 	const string  getDayName[8] = {
 			"Sunday",
 			"Monday",
@@ -72,8 +72,6 @@ private:
 			"Friday",
 			"Saturday"
 	};
-
-	const int championInitialHP[5] = {100,100,150,100,110};
 
     /* private methods */
 	int  calculateDamageTaken(string day,dateTimeType * date,champion_t champion);

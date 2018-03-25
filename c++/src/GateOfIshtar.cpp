@@ -35,8 +35,7 @@ Champion::Champion(champion_t champion)
 	championMap.insert( pair <champion_t, championPairType> ( Spirit, championPairType (100, "Spirit" )));
 	championMap.insert( pair <champion_t, championPairType> ( Vampire,championPairType (110, "Vampire")));
 
-
-	 championMapType::iterator foundIndex  = championMap.find(champion) ;
+	championMapType::iterator foundIndex  = championMap.find(champion) ;
 
 	if (foundIndex  != championMap.end() )
 	{
@@ -54,6 +53,7 @@ Champion::Champion(champion_t champion)
  *****************************************************************************/
 Champion::~Champion()
 {
+	championMap.clear();
 }
 
 
@@ -101,73 +101,75 @@ int Champion::calculateDamageTaken(string day,dateTimeType* date,champion_t cham
 	}
 	else /* calculate damage */
 	{
+		int hour = date->tm_hour ;
+		int min  = date->tm_min ;
 		/* "Janna" demon of Wind spawned */
-		if 		(  ( date->tm_hour == 6  )
-				&& ( date->tm_min  >= 0  )
-				&& ( date->tm_min  <= 29 )    )
+		if 		(  ( hour == 6  )
+				&& ( min  >= 0  )
+				&& ( min  <= 29 )    )
 		{
 			return 7;
 		}
 		/* "Tiamat" goddess of Oceans spawned */
-		else if (   ( date->tm_hour == 6  )
-				&&  ( date->tm_min  >= 30 )
-				&&  ( date->tm_min  <= 59 )    )
+		else if (   ( hour == 6  )
+				&&  ( min  >= 30 )
+				&&  ( min  <= 59 )    )
 		{
 			return 18;
 		}
 		/* "Mithra" goddess of sun spawned */
-		else if  (  ( date->tm_hour == 7  )
-				&&  ( date->tm_min  >= 0  )
-				&&  ( date->tm_min  <= 59 )    )
+		else if  (  ( hour == 7  )
+				&&  ( min  >= 0  )
+				&&  ( min  <= 59 )    )
 		{
 			return 25;
 		}
 		/* "Warwick" God of war spawned */
-		else if  (  ( date->tm_hour == 8  )
-				&&  ( date->tm_min  >= 0  )
-				&&  ( date->tm_min  <= 29 )    )
+		else if  (  ( hour == 8  )
+				&&  ( min  >= 0  )
+				&&  ( min  <= 29 )    )
 		{
 			return 18;
 		}
 		/* "Kalista" demon of agony spawned */
-		else if  (  ( date->tm_hour >= 8  )
-				&&  ( date->tm_hour <= 14 )
-				&&  ( date->tm_min  >= 30 )
-				&&  ( date->tm_min  <= 59 )    )
+		else if  (  ( hour >= 8  )
+				&&  ( hour <= 14 )
+				&&  ( min  >= 30 )
+				&&  ( min  <= 59 )    )
 		{
 			return 7;
 		}
 		/* "Ahri" goddess of wisdom spawned */
-		else if  (  ( date->tm_hour == 15 )
-				&&  ( date->tm_min  >= 0  )
-				&&  ( date->tm_min  <= 29  )    )
+		else if  (  ( hour == 15 )
+				&&  ( min  >= 0  )
+				&&  ( min  <= 29  )    )
 		{
 			return 13;
 		}
 		/* "Brand" god of fire spawned */
-		else if  ( ( date->tm_hour == 15  && date->tm_min >= 0  )
-				|| ( date->tm_hour == 16  && date->tm_min <= 59 )    )
+		else if  ( ( hour == 15  && min >= 30  )
+				|| ( hour == 16  && min <= 59 )    )
 		{
 			return 25;
 		}
 		/* "Rumble" god of lightning spawned */
-		else if  ( ( date->tm_hour == 17  )
-				&& ( date->tm_min  >= 0   )
-				&& ( date->tm_min  <= 59  )    )
+		else if  ( ( hour == 17  )
+				&& ( min  >= 0   )
+				&& ( min  <= 59  )    )
 		{
 			return 18;
 		}
 		/* "Skarner" the scorpion demon spawned */
-		else if  ( ( date->tm_hour >= 18 )
-				&& ( date->tm_hour <= 19 )
-				&& ( date->tm_min  >= 0  )
-				&& ( date->tm_min  <= 59 )    )
+		else if  ( ( hour >= 18 )
+				&& ( hour <= 19 )
+				&& ( min  >= 0  )
+				&& ( min  <= 59 )    )
 		{
 			return 7;
 		}
 		/* "Luna" The goddess of the moon spawned */
-		else if  ( ( date->tm_hour == 20  )
-				&& ( date->tm_min  <= 59   )    )
+		else if  ( ( hour == 20  )
+				&& ( min  <= 59   )    )
 		{
 			return 13;
 		}
@@ -257,3 +259,15 @@ int Champion::calculateChampionHealth (champion_t champion , CircularBuffer<date
 
 	return HP ;
 }
+
+
+/*****************************************************************************
+ * Function Name: getChampionMap
+ *   Description: Return map which contains attributes of champion
+ *
+ *****************************************************************************/
+championMapType Champion::getChampionMap () const
+{
+	return championMap ;
+}
+
